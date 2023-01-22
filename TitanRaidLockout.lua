@@ -397,10 +397,10 @@ function TRaidLockout_UpdateLockoutData()
         local name, _, reset, difficulty, _, _, _, _, _, _, numEncounters, encounterProgress, _ =
             GetSavedInstanceInfo(savedIndex)
 
-        if difficulty == 3 then
+        if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 10) then
             name = name .. " 10"
         end
-        if difficulty == 4 then
+        if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 25) then
             name = name .. " 25"
         end
 
@@ -498,7 +498,9 @@ function TRaidLockout_SetButtonText()
             for savedIndex = 1, numSaved do
                 local name, _, _, difficulty = GetSavedInstanceInfo(savedIndex)
     
-                if difficulty == 3 then name = name .. " 10" end
+                if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 10) then 
+                    name = name .. " 10" 
+                end
                 
                 if TitanUtils_TableContainsValue(LOCALIZED_ALL_RAID_NAMES, name) then
 
@@ -519,7 +521,9 @@ function TRaidLockout_SetButtonText()
              for savedIndex = 1, numSaved do
                 local name, _, _, difficulty = GetSavedInstanceInfo(savedIndex)
     
-                if difficulty == 4 then name = name .. " 25" end
+                if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 25) then
+                    name = name .. " 25" 
+                end
                 
                 if TitanUtils_TableContainsValue(LOCALIZED_ALL_RAID_NAMES, name) then
                     for key, subTable in pairs(raidsTableWoTLK25) do
@@ -573,7 +577,9 @@ function TRaidLockout_SetButtonText()
             for savedIndex = 1, numSaved do
                 local name, _, _, difficulty = GetSavedInstanceInfo(savedIndex)
     
-                if difficulty == 3 then name = name .. " 10" end
+                if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 10) then 
+                    name = name .. " 10" 
+                end
 
                 if TitanUtils_TableContainsValue(LOCALIZED_ALL_RAID_NAMES, name) then
                     for key, subTable in pairs(raidsTableWoTLK10) do
@@ -591,7 +597,9 @@ function TRaidLockout_SetButtonText()
             for savedIndex = 1, numSaved do
                 local name, _, _, difficulty = GetSavedInstanceInfo(savedIndex)
     
-                if difficulty == 4 then name = name .. " 25" end
+                if TRaidLockout_IsDifficultyIdRaidSize(difficulty, 25) then
+                    name = name .. " 25"
+                end
 
                 if TitanUtils_TableContainsValue(LOCALIZED_ALL_RAID_NAMES, name) then
                     for key, subTable in pairs(raidsTableWoTLK25) do
@@ -745,4 +753,24 @@ function TRaidLockout_SetTooltip()
         end
     end
 
+end
+
+function TRaidLockout_IsDifficultyIdRaidSize(difficultyId, size)
+    if size == 10 then
+        if difficultyId == 3 or difficultyId == 5 or difficultyId == 175 or difficultyId == 193 then
+            return true
+        else
+            return false
+        end
+    end
+
+    if size == 25 then
+        if difficultyId == 4 or difficultyId == 6 or difficultyId == 176 or difficultyId == 194 then
+            return true
+        else
+            return false
+        end
+    end
+
+    return false -- Unsupported size
 end
