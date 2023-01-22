@@ -1,3 +1,7 @@
+### v1.3.2 Beta WoTLK
+
+-   Bugfix: Ulduar raid not showing
+
 ### v1.3.1 WoTLK
 
 -   Addition: Showing 10/25-man version for WoTLK raids
