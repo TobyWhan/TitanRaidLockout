@@ -397,10 +397,10 @@ function TRaidLockout_UpdateLockoutData()
         local name, _, reset, difficulty, _, _, _, _, _, _, numEncounters, encounterProgress, _ =
             GetSavedInstanceInfo(savedIndex)
 
-        if difficulty == 3 then
+        if (difficulty == 3 or difficulty == 175) then
             name = name .. " 10"
         end
-        if difficulty == 4 then
+        if (difficulty == 4 or difficulty == 176) then
             name = name .. " 25"
         end
 
